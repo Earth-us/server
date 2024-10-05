@@ -4,6 +4,8 @@ import com.greenity.server.user.domain.User;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
+
 @Getter
 @Setter
 @Entity
@@ -24,15 +26,25 @@ public class Writing {
     @Column(name = "writing_pic")
     private String writing_pic;
 
+    @Column(name = "heart_count", nullable = false)
+    private Long heartCount;
+
     @ManyToOne
     @JoinColumn(name = "writer", referencedColumnName = "id")
     private User writer;
 
+    @OneToMany(mappedBy = "originalWriting", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Comment> comments;
+
+    @OneToMany(mappedBy = "originalWriting", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Heart> hearts;
+
     @Builder
-    public Writing(String title, String content, String writing_pic, User writer) {
+    public Writing(String title, String content, String writing_pic, Long heartCount, User writer) {
         this.title = title;
         this.content = content;
         this.writing_pic = writing_pic;
+        this.heartCount = heartCount;
         this.writer = writer;
     }
 
