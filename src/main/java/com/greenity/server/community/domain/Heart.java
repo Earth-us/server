@@ -8,6 +8,9 @@ import lombok.*;
 @Setter
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Table(uniqueConstraints = {
+        @UniqueConstraint(columnNames = {"heart_user", "original_writing"})
+})
 public class Heart {
 
     @Id
