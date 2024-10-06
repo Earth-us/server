@@ -7,6 +7,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Repository
 public interface WritingRepository extends JpaRepository<Writing, Long> {
 
@@ -19,5 +21,8 @@ public interface WritingRepository extends JpaRepository<Writing, Long> {
     @Transactional
     @Query("UPDATE Writing w SET w.heartCount = w.heartCount - 1 WHERE w.id = :writingId")
     void downHeartCount(Long writingId);
+
+    @Query("SELECT w FROM Writing w WHERE w.title LIKE %:keyword% OR w.content LIKE %:keyword%")
+    List<Writing> searchWritings(String keyword);
 
 }
