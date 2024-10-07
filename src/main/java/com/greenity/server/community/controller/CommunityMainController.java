@@ -16,9 +16,9 @@ public class CommunityMainController {
 
     private final CommunityMainService communityMainService;
 
-    @PostMapping("/community/search")
+    @GetMapping("/community/search")
     @ResponseBody
-    public ResponseTemplate<?> searchWritings(@RequestBody SearchRequest searchRequest) {
+    public ResponseTemplate<?> searchWritings(SearchRequest searchRequest) {
         List<WritingResponse> writings = communityMainService.searchWritings(searchRequest.keyword());
         return ResponseTemplate.from(WritingResponseList.from(writings));
     }
