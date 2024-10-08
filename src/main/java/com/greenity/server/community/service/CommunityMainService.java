@@ -15,6 +15,12 @@ public class CommunityMainService {
 
     private final WritingRepository writingRepository;
 
+    public List<WritingResponse> allWritings() {
+        return writingRepository.findAllByOrderByIdDesc().stream()
+                .map(WritingResponse::from)
+                .toList();
+    }
+
     public List<WritingResponse> searchWritings(String keyword) {
         return writingRepository.searchWritings(keyword).stream()
                 .map(WritingResponse::from)

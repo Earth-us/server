@@ -22,7 +22,9 @@ public interface WritingRepository extends JpaRepository<Writing, Long> {
     @Query("UPDATE Writing w SET w.heartCount = w.heartCount - 1 WHERE w.id = :writingId")
     void downHeartCount(Long writingId);
 
-    @Query("SELECT w FROM Writing w WHERE w.title LIKE %:keyword% OR w.content LIKE %:keyword%")
+    @Query("SELECT w FROM Writing w WHERE w.title LIKE %:keyword% OR w.content LIKE %:keyword% ORDER BY w.id DESC")
     List<Writing> searchWritings(String keyword);
+
+    List<Writing> findAllByOrderByIdDesc();
 
 }

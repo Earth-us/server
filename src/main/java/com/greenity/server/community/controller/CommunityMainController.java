@@ -16,6 +16,13 @@ public class CommunityMainController {
 
     private final CommunityMainService communityMainService;
 
+    @GetMapping("/community")
+    @ResponseBody
+    public ResponseTemplate<?> allWritings() {
+        List<WritingResponse> writings = communityMainService.allWritings();
+        return ResponseTemplate.from(WritingResponseList.from(writings));
+    }
+
     @GetMapping("/community/search")
     @ResponseBody
     public ResponseTemplate<?> searchWritings(SearchRequest searchRequest) {
