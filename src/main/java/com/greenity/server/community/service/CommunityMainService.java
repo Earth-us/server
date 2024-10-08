@@ -21,8 +21,8 @@ public class CommunityMainService {
                 .toList();
     }
 
-    public List<WritingResponse> searchWritings(String keyword) {
-        return writingRepository.searchWritings(keyword).stream()
+    public List<WritingResponse> searchWritings(String nickname, String title, String content) {
+        return writingRepository.searchWritings(nickname, title, content).stream()
                 .map(WritingResponse::from)
                 .toList();
     }
