@@ -27,4 +27,7 @@ public interface WritingRepository extends JpaRepository<Writing, Long> {
 
     List<Writing> findAllByOrderByIdDesc();
 
+    @Query("SELECT w FROM Writing w where w.writer.id = :userId order by w.id DESC ")
+    List<Writing> findAllByUserId(Long userId);
+
 }
