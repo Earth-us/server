@@ -3,7 +3,6 @@ package com.greenity.server.community.service;
 import com.greenity.server.community.dto.response.MyCommentResponse;
 import com.greenity.server.community.dto.response.MyHeartResponse;
 import com.greenity.server.community.dto.response.MyWritingResponse;
-import com.greenity.server.community.dto.response.WritingResponse;
 import com.greenity.server.community.repository.CommentRepository;
 import com.greenity.server.community.repository.HeartRepository;
 import com.greenity.server.community.repository.WritingRepository;

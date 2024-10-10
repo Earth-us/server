@@ -16,21 +16,21 @@ public class CommunityUserController {
 
     private final CommunityUserService communityUserService;
 
-    @GetMapping("/community/writings")
+    @GetMapping("/community/writings") //작성한 글 보기
     @ResponseBody
     public ResponseTemplate<?> myWritings(Long userId) {
         List<MyWritingResponse> writings = communityUserService.myWritings(userId);
         return ResponseTemplate.from(MyWritingResponseList.from(writings));
     }
 
-    @GetMapping("/community/comments")
+    @GetMapping("/community/comments") //작성한 댓글 보기
     @ResponseBody
     public ResponseTemplate<?> myComments(Long userId) {
         List<MyCommentResponse> comments = communityUserService.myComments(userId);
         return ResponseTemplate.from(MyCommentResponseList.from(comments));
     }
 
-    @GetMapping("/community/hearts")
+    @GetMapping("/community/hearts") //좋아요 보기
     @ResponseBody
     public ResponseTemplate<?> myHearts(Long userId) {
         List<MyHeartResponse> hearts = communityUserService.myHearts(userId);
