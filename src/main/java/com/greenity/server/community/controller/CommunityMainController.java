@@ -16,14 +16,14 @@ public class CommunityMainController {
 
     private final CommunityMainService communityMainService;
 
-    @GetMapping("/community")
+    @GetMapping("/community") //전체 글 불러오기
     @ResponseBody
     public ResponseTemplate<?> allWritings() {
         List<WritingResponse> writings = communityMainService.allWritings();
         return ResponseTemplate.from(WritingResponseList.from(writings));
     }
 
-    @GetMapping("/community/search")
+    @GetMapping("/community/search") //글 검색
     @ResponseBody
     public ResponseTemplate<?> searchWritings(SearchRequest searchRequest) {
         List<WritingResponse> writings = communityMainService.searchWritings(searchRequest.nickname(), searchRequest.title(), searchRequest.content());
