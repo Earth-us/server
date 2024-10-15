@@ -28,4 +28,11 @@ public class ChatController {
         return ResponseTemplate.from(chatId);
     }
 
+    @DeleteMapping("/community/chat/{chatId}")
+    @ResponseBody
+    public ResponseTemplate<?> deleteChat(@PathVariable Long chatId) {
+        chatService.deleteChat(chatId);
+        return ResponseTemplate.EMPTY_RESPONSE;
+    }
+
 }
