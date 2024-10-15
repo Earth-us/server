@@ -42,4 +42,9 @@ public class ChatService {
         return chat.getId();
     }
 
+    public void deleteChat(Long chatId) {
+        Chat chat = chatRepository.findById(chatId).orElse(null);
+        chatRepository.delete(chat);
+    }
+
 }
