@@ -3,6 +3,8 @@ package com.greenity.server.community.service;
 import com.greenity.server.community.domain.Writing;
 import com.greenity.server.community.dto.response.CommentResponse;
 import com.greenity.server.community.dto.response.WritingResponse;
+import com.greenity.server.community.exception.WritingNotFoundException;
+import com.greenity.server.community.exception.errorcode.CoummunityErrorCode;
 import com.greenity.server.community.repository.CommentRepository;
 import com.greenity.server.community.repository.WritingRepository;
 import lombok.RequiredArgsConstructor;
@@ -32,7 +34,8 @@ public class CommunityMainService {
     }
 
     public Writing showWriting(Long writingId) {
-        return writingRepository.findById(writingId).orElse(null);
+        return writingRepository.findById(writingId)
+                .orElseThrow(() -> new WritingNotFoundException(CoummunityErrorCode.WRITING_NOT_FOUND));
     }
 
     public List<CommentResponse> showCommentList(Long writingId) {
