@@ -1,6 +1,8 @@
 package com.greenity.server.community.service;
 
 import com.greenity.server.community.domain.Writing;
+import com.greenity.server.community.exception.WritingNotFoundException;
+import com.greenity.server.community.exception.errorcode.CoummunityErrorCode;
 import com.greenity.server.community.repository.WritingRepository;
 import com.greenity.server.user.domain.User;
 import com.greenity.server.user.repository.UserRepository;
@@ -30,7 +32,8 @@ public class CommunityWritingService {
     }
 
     public void editWriting(Long writingId, String title, String content, String writing_pic) {
-        Writing writing = writingRepository.findById(writingId).orElse(null);
+        Writing writing = writingRepository.findById(writingId)
+                .orElseThrow(() -> new WritingNotFoundException(CoummunityErrorCode.WRITING_NOT_FOUND));
         writing.setTitle(title);
         writing.setContent(content);
         writing.setWriting_pic(writing_pic);
@@ -38,7 +41,8 @@ public class CommunityWritingService {
     }
 
     public void deleteWriting(Long writingId) {
-        Writing writing = writingRepository.findById(writingId).orElse(null);
+        Writing writing = writingRepository.findById(writingId)
+                .orElseThrow(() -> new WritingNotFoundException(CoummunityErrorCode.WRITING_NOT_FOUND));
         writingRepository.delete(writing);
     }
 

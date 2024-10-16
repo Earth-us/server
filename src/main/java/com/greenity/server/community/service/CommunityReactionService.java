@@ -3,6 +3,9 @@ package com.greenity.server.community.service;
 import com.greenity.server.community.domain.Comment;
 import com.greenity.server.community.domain.Heart;
 import com.greenity.server.community.domain.Writing;
+import com.greenity.server.community.exception.CommentNotFoundException;
+import com.greenity.server.community.exception.WritingNotFoundException;
+import com.greenity.server.community.exception.errorcode.CoummunityErrorCode;
 import com.greenity.server.community.repository.CommentRepository;
 import com.greenity.server.community.repository.HeartRepository;
 import com.greenity.server.community.repository.WritingRepository;
@@ -23,7 +26,8 @@ public class CommunityReactionService {
     private final UserRepository userRepository;
 
     public void writeComment(Long userId, Long writingId, String content) {
-        Writing originalWriting = writingRepository.findById(writingId).orElse(null);
+        Writing originalWriting = writingRepository.findById(writingId)
+                .orElseThrow(() -> new WritingNotFoundException(CoummunityErrorCode.WRITING_NOT_FOUND));
         User commenter = userRepository.findById(userId).orElse(null);
         Comment comment = Comment.builder()
                 .content(content)
@@ -34,19 +38,22 @@ public class CommunityReactionService {
     }
 
     public void editComment(Long commentId, String content) {
-        Comment comment = commentRepository.findById(commentId).orElse(null);
+        Comment comment = commentRepository.findById(commentId)
+                .orElseThrow(() -> new CommentNotFoundException(CoummunityErrorCode.COMMENT_NOT_FOUND));
         comment.setContent(content);
         commentRepository.save(comment);
     }
 
     public void deleteComment(Long commentId) {
-        Comment comment = commentRepository.findById(commentId).orElse(null);
+        Comment comment = commentRepository.findById(commentId)
+                .orElseThrow(() -> new CommentNotFoundException(CoummunityErrorCode.COMMENT_NOT_FOUND));
         commentRepository.delete(comment);
     }
 
     public void heart(Long userId, Long writingId) {
         User heartUser = userRepository.findById(userId).orElse(null);
-        Writing originalWriting = writingRepository.findById(writingId).orElse(null);
+        Writing originalWriting = writingRepository.findById(writingId)
+                .orElseThrow(() -> new WritingNotFoundException(CoummunityErrorCode.WRITING_NOT_FOUND));
         writingRepository.upHeartCount(writingId);
         Heart heart = Heart.builder()
                 .heartUser(heartUser)
