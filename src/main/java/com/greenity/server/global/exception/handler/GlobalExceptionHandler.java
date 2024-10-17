@@ -1,5 +1,6 @@
 package com.greenity.server.global.exception.handler;
 
+import com.greenity.server.chat.exception.ChatNotFoundException;
 import com.greenity.server.community.exception.CommentNotFoundException;
 import com.greenity.server.community.exception.WritingNotFoundException;
 import com.greenity.server.global.exception.dto.ErrorResponse;
@@ -29,12 +30,17 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     @ExceptionHandler(WritingNotFoundException.class)
-    public ResponseEntity<Object> handleUserNotExist(final WritingNotFoundException e) {
+    public ResponseEntity<Object> handleWritingNotFound(final WritingNotFoundException e) {
         return handleExceptionInternal(e.getErrorCode());
     }
 
     @ExceptionHandler(CommentNotFoundException.class)
-    public ResponseEntity<Object> handleMatchNotFound(final CommentNotFoundException e) {
+    public ResponseEntity<Object> handleCommentNotFound(final CommentNotFoundException e) {
+        return handleExceptionInternal(e.getErrorCode());
+    }
+
+    @ExceptionHandler(ChatNotFoundException.class)
+    public ResponseEntity<Object> handleChatNotFound(final ChatNotFoundException e) {
         return handleExceptionInternal(e.getErrorCode());
     }
 
