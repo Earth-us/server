@@ -2,6 +2,7 @@ package com.greenity.server.chat.service;
 
 import com.greenity.server.chat.domain.Chat;
 import com.greenity.server.chat.dto.response.ChatInfoResponse;
+import com.greenity.server.chat.dto.response.ProfileResponse;
 import com.greenity.server.chat.repository.ChatRepository;
 import com.greenity.server.user.domain.User;
 import com.greenity.server.user.repository.UserRepository;
@@ -18,6 +19,11 @@ public class ChatService {
 
     private final ChatRepository chatRepository;
     private final UserRepository userRepository;
+
+    public ProfileResponse showProfile(Long profileId) {
+        User user = userRepository.findById(profileId).orElse(null);
+        return ProfileResponse.from(user);
+    }
 
     public List<ChatInfoResponse> findChats(Long userId) {
         return chatRepository.findChats(userId).stream()

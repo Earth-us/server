@@ -1,6 +1,7 @@
 package com.greenity.server.chat.controller;
 
 import com.greenity.server.chat.dto.response.ChatInfoResponse;
+import com.greenity.server.chat.dto.response.ProfileResponse;
 import com.greenity.server.chat.service.ChatService;
 import com.greenity.server.global.dto.ResponseTemplate;
 import lombok.RequiredArgsConstructor;
@@ -13,6 +14,13 @@ import java.util.List;
 public class ChatController {
 
     final private ChatService chatService;
+
+    @GetMapping("/community/{profileId}")
+    @ResponseBody
+    public ResponseTemplate<?> showProfile(@PathVariable Long profileId) {
+        ProfileResponse profile = chatService.showProfile(profileId);
+        return ResponseTemplate.from(profile);
+    }
 
     @GetMapping("/community/chat")
     @ResponseBody
