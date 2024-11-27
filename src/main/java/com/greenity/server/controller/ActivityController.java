@@ -34,7 +34,6 @@ public class ActivityController {
     }
 
 
-
     // 활동 검색
     @GetMapping("/search")
     @Operation(summary = "활동 검색", description = "조건에 따라 활동을 검색합니다.")
