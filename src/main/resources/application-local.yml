@@ -2,16 +2,21 @@ spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/greenitydb
-    username: root     # ????? ?? ??
+    username: root
     password: 1234
 
   jpa:
     hibernate:
-      ddl-auto: create   # update or create or none
+      ddl-auto: update   # update or create or none
     show-sql: true
     properties:
       hibernate:
         format_sql: true
+
+  data:
+    redis:
+      host: localhost
+      port: 6379
 
 springdoc:
   api-docs:
