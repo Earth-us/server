@@ -27,7 +27,7 @@ public class ActivityRound {
     private LocalDate activityDate; // 회차 날짜
 
     @Column(nullable = true)
-    LocalTime activityTime;
+    private LocalTime activityTime;
 
     @Column(nullable = false)
     private Long activityNum; // 활동별 회차 번호

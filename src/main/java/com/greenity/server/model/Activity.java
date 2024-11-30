@@ -1,6 +1,5 @@
 package com.greenity.server.model;
 
-
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -34,9 +33,8 @@ public class Activity {
     @Column(nullable = false)
     private ActivityMethod activityMethod;
 
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private JoinMethod joinMethod;
+    @Column
+    private Boolean isApprovalRequired; // 새 필드 추가
 
     @Column(nullable = false, length = 200)
     private String content;
@@ -57,9 +55,5 @@ public class Activity {
 
     public enum ActivityMethod {
         ONLINE, OFFLINE
-    }
-
-    public enum JoinMethod {
-        FREE, REQUIRED
     }
 }

@@ -3,7 +3,6 @@ package com.greenity.server.repository;
 
 import com.greenity.server.dto.ActivitySearchDTO;
 import com.greenity.server.model.Activity;
-import com.greenity.server.model.ActivityRound;
 import io.lettuce.core.dynamic.annotation.Param;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
