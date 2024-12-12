@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
 @RestController
 @RequestMapping("/activity")
 @Tag(name = "Activity API", description = "활동 관련 API")
@@ -29,12 +30,9 @@ public class ActivityController {
     @PostMapping
     @Operation(summary = "활동 생성", description = "활동을 생성합니다.")
     public ResponseEntity<ActivityDTO> createActivity(@RequestBody ActivityDTO activityDTO) {
-        try {
-            ActivityDTO createdActivity = activityService.createActivity(activityDTO);
-            return ResponseEntity.ok(createdActivity);
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
-        }
+
+        ActivityDTO createdActivity = activityService.createActivity(activityDTO);
+        return ResponseEntity.ok(createdActivity);
     }
 
 
@@ -49,15 +47,11 @@ public class ActivityController {
         Activity.Category categoryEnum = null;
         Activity.ActivityMethod methodEnum = null;
 
-        try {
-            if (category != null) {
-                categoryEnum = Activity.Category.valueOf(category.toUpperCase());
-            }
-            if (activityMethod != null) {
-                methodEnum = Activity.ActivityMethod.valueOf(activityMethod.toUpperCase());
-            }
-        } catch (IllegalArgumentException e) {
-            return ResponseEntity.badRequest().body(null); // 잘못된 값일 경우 400 반환
+        if (category != null) {
+            categoryEnum = Activity.Category.valueOf(category.toUpperCase());
+        }
+        if (activityMethod != null) {
+            methodEnum = Activity.ActivityMethod.valueOf(activityMethod.toUpperCase());
         }
 
         List<ActivitySearchDTO> activities = activityService.searchActivities(isEnd, categoryEnum, methodEnum);
@@ -69,14 +63,11 @@ public class ActivityController {
     @GetMapping("/{activityId}/detail")
     @Operation(summary = "활동 상세 조회", description = "ID에 해당하는 활동의 상세 정보를 조회합니다.")
     public ResponseEntity<ActivityDTO> getActivityDetail(@PathVariable Long activityId) {
-        try {
-            // Service 계층에서 ActivityDTO 조회
-            ActivityDTO activityDTO = activityService.getActivityById(activityId);
-            return ResponseEntity.ok(activityDTO);
-        } catch (IllegalArgumentException e) {
-            // ID에 해당하는 활동이 없을 경우 404 응답
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
-        }
+
+        // Service 계층에서 ActivityDTO 조회
+        ActivityDTO activityDTO = activityService.getActivityById(activityId);
+        return ResponseEntity.ok(activityDTO);
+
     }
 
 
@@ -84,26 +75,22 @@ public class ActivityController {
     @PutMapping("/{id}")
     @Operation(summary = "활동 수정", description="특정 활동의 정보를 수정합니다.")
     public ResponseEntity<ActivityDTO> updateActivity(
-            @PathVariable Long id,
-            @RequestBody ActivityDTO activityDTO){
-        try{
-            ActivityDTO updateActivity = activityService.updateActivity(id,activityDTO);
-            return ResponseEntity.ok(updateActivity);
-        }catch(IllegalArgumentException e){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
-        }
+        @PathVariable Long id,
+        @RequestBody ActivityDTO activityDTO){
+
+        ActivityDTO updateActivity = activityService.updateActivity(id,activityDTO);
+        return ResponseEntity.ok(updateActivity);
+
     }
 
     //활동 삭제
     @DeleteMapping("/{id}")
     @Operation(summary ="활동 삭제", description = "특정 활동을 삭제합니다.")
     public ResponseEntity<String> deleteActivity(@PathVariable Long id){
-        try{
-            activityService.deleteActivity(id);
-            return ResponseEntity.ok("활동이 성공적으로 삭제되었습니다.");
-        }catch(IllegalArgumentException e){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
-        }
+
+        activityService.deleteActivity(id);
+        return ResponseEntity.ok("활동이 성공적으로 삭제되었습니다.");
+
     }
 
 }

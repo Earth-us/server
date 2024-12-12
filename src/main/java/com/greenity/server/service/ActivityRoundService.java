@@ -28,17 +28,12 @@ public class ActivityRoundService {
         Activity activity = activityRepository.findById(activityId)
                 .orElseThrow(() -> new IllegalArgumentException("해당 활동이 존재하지 않습니다."));
 
-        // 최대 회차 번호 확인 (null 처리 추가)
-        Integer maxActivityNum = activityRoundRepository.findMaxActivityNumByActivityId(activityId);
-        maxActivityNum = (maxActivityNum == null) ? 0 : maxActivityNum;
-
-        // 요청된 회차 번호 검증
+        // 요청된 회차 번호 검증 (번호의 존재 여부 확인)
         long requestedActivityNum = activityRoundDTO.getActivityNum();
-        if (requestedActivityNum > activity.getActivityCount() || requestedActivityNum <= 0) {
+        if (requestedActivityNum <= 0 || requestedActivityNum > activity.getActivityCount()) {
             throw new IllegalArgumentException("잘못된 회차번호입니다.");
         }
-
-        if (requestedActivityNum <= maxActivityNum) {
+        if (activityRoundRepository.existsByActivityIdAndActivityNum(activityId, requestedActivityNum)) {
             throw new IllegalArgumentException("회차번호 " + requestedActivityNum + "는 이미 생성되었습니다.");
         }
 
@@ -49,6 +44,7 @@ public class ActivityRoundService {
         // 저장
         activityRoundRepository.save(activityRound);
     }
+
 
     // 회차 조회
     public List<ActivityRoundDTO> getActivityRounds(Long activityId) {

@@ -12,6 +12,7 @@ public class ActivityMapper {
                 activity.getLocation(),
                 activity.getSubEnd(),
                 activity.getRecruitNum(),
+                activity.getCurrentParticipants(),
                 activity.getCategory(),
                 activity.getActivityMethod(),
                 activity.getIsApprovalRequired(),
@@ -30,6 +31,7 @@ public class ActivityMapper {
         activity.setLocation(dto.getLocation());
         activity.setSubEnd(dto.getSubEnd());
         activity.setRecruitNum(dto.getRecruitNum());
+        activity.setCurrentParticipants(dto.getCurrentParticipants());
         activity.setCategory(dto.getCategory());
         activity.setActivityMethod(dto.getActivityMethod());
         activity.setIsApprovalRequired(dto.getIsApprovalRequired());
@@ -46,6 +48,7 @@ public class ActivityMapper {
         if (dto.getLocation() != null) activity.setLocation(dto.getLocation());
         if (dto.getSubEnd() != null) activity.setSubEnd(dto.getSubEnd());
         if (dto.getRecruitNum() != null) activity.setRecruitNum(dto.getRecruitNum());
+        if(dto.getCurrentParticipants() != null) activity.setCurrentParticipants(dto.getCurrentParticipants());
         if (dto.getCategory() != null) activity.setCategory(dto.getCategory());
         if (dto.getActivityMethod() != null) activity.setActivityMethod(dto.getActivityMethod());
         if (dto.getIsApprovalRequired() != null) activity.setIsApprovalRequired(dto.getIsApprovalRequired());

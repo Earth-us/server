@@ -27,26 +27,22 @@ public class ActivityRoundController {
     @PostMapping
     @Operation(summary = "활동 회차 생성", description = "특정 활동의 회차를 생성합니다.")
     public ResponseEntity<String> createActivityRound(
-            @PathVariable Long activityId,
-            @RequestBody ActivityRoundDTO activityRoundDTO) {
-        try {
-            activityRoundService.createActivityRound(activityId, activityRoundDTO);
-            return ResponseEntity.ok("회차가 성공적으로 생성되었습니다.");
-        } catch (IllegalArgumentException e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+        @PathVariable Long activityId,
+        @RequestBody ActivityRoundDTO activityRoundDTO) {
+
+        activityRoundService.createActivityRound(activityId, activityRoundDTO);
+        return ResponseEntity.ok("회차가 성공적으로 생성되었습니다.");
+
     }
 
     // 회차 조회
     @GetMapping
     @Operation(summary = "활동 회차 조회", description = "특정 활동의 모든 회차 정보를 조회합니다.")
     public ResponseEntity<List<ActivityRoundDTO>> getActivityRounds(@PathVariable Long activityId) {
-        try {
-            List<ActivityRoundDTO> rounds = activityRoundService.getActivityRounds(activityId);
-            return ResponseEntity.ok(rounds);
-        } catch (IllegalArgumentException e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
-        }
+
+        List<ActivityRoundDTO> rounds = activityRoundService.getActivityRounds(activityId);
+        return ResponseEntity.ok(rounds);
+
     }
 
     // 회차 수정
@@ -56,14 +52,10 @@ public class ActivityRoundController {
             @PathVariable Long activityId,
             @PathVariable Long activityNum,
             @RequestBody ActivityRoundDTO activityRoundDTO) {
-        try {
+
             activityRoundService.updateActivityRound(activityId, activityNum, activityRoundDTO);
             return ResponseEntity.ok("활동 회차가 성공적으로 수정되었습니다.");
-        } catch (IllegalArgumentException e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("서버 에러 발생");
-        }
+
     }
 
     // 회차 삭제
@@ -72,11 +64,9 @@ public class ActivityRoundController {
     public ResponseEntity<String> deleteActivityRound(
             @PathVariable Long activityId,
             @PathVariable Long activityNum) {
-        try {
+
             activityRoundService.deleteActivityRound(activityId, activityNum);
             return ResponseEntity.ok("회차가 성공적으로 삭제되었습니다.");
-        } catch (IllegalArgumentException e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
-        }
+
     }
 }

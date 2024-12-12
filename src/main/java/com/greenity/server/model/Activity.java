@@ -23,7 +23,10 @@ public class Activity {
     @Column(nullable = false)
     private java.time.LocalDateTime subEnd;
 
-    private Long recruitNum;
+    @Column(nullable = false)
+    private Long currentParticipants = 0L; //현재 참여 인원
+    @Column(nullable = false)
+    private Long recruitNum; //최대 참여 인원
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
@@ -34,7 +37,7 @@ public class Activity {
     private ActivityMethod activityMethod;
 
     @Column
-    private Boolean isApprovalRequired; // 새 필드 추가
+    private Boolean isApprovalRequired;
 
     @Column(nullable = false, length = 200)
     private String content;

@@ -24,7 +24,10 @@ public class ActivityDTO {
     @JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ss")
     private LocalDateTime subEnd;
 
+    @NotNull
     private Long recruitNum;
+    @NotNull
+    private Long currentParticipants;
 
     @NotNull
     private Activity.Category category;

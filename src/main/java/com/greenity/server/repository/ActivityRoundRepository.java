@@ -16,8 +16,10 @@ public interface ActivityRoundRepository extends JpaRepository<ActivityRound, Lo
 
     List<ActivityRound> findByActivityId(Long activityID);
 
-    @Query("SELECT MAX(ar.activityNum) FROM ActivityRound ar WHERE ar.activity.id = :activityId")
-    Integer findMaxActivityNumByActivityId(@Param("activityId") Long activityId);
+
+    @Query("SELECT COUNT(ar) > 0 FROM ActivityRound ar WHERE ar.activity.id = :activityId AND ar.activityNum = :activityNum")
+    boolean existsByActivityIdAndActivityNum(@Param("activityId") Long activityId, @Param("activityNum") Long activityNum);
+
 
     Optional<ActivityRound> findByActivityIdAndActivityNum(Long activityId, Long activityNum);
 
