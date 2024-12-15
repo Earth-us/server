@@ -2,13 +2,13 @@ package com.greenity.server.controller;
 
 
 import com.greenity.server.dto.ActivityDTO;
+import com.greenity.server.dto.ActivityParticipantDTO;
 import com.greenity.server.dto.ActivitySearchDTO;
 import com.greenity.server.model.Activity;
 import com.greenity.server.service.ActivityService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -72,25 +72,34 @@ public class ActivityController {
 
 
     //활동 수정
-    @PutMapping("/{id}")
+    @PutMapping("/{activityId}")
     @Operation(summary = "활동 수정", description="특정 활동의 정보를 수정합니다.")
     public ResponseEntity<ActivityDTO> updateActivity(
-        @PathVariable Long id,
+        @PathVariable Long activityId,
         @RequestBody ActivityDTO activityDTO){
 
-        ActivityDTO updateActivity = activityService.updateActivity(id,activityDTO);
+        ActivityDTO updateActivity = activityService.updateActivity(activityId,activityDTO);
         return ResponseEntity.ok(updateActivity);
 
     }
 
     //활동 삭제
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/{activityId}")
     @Operation(summary ="활동 삭제", description = "특정 활동을 삭제합니다.")
-    public ResponseEntity<String> deleteActivity(@PathVariable Long id){
+    public ResponseEntity<String> deleteActivity(@PathVariable Long activityId){
 
-        activityService.deleteActivity(id);
+        activityService.deleteActivity(activityId);
         return ResponseEntity.ok("활동이 성공적으로 삭제되었습니다.");
 
     }
+
+    //활동 참가자 조회
+    @GetMapping ("/{activityId}/participants")
+    @Operation(summary = "활동 참가자 조회", description = "특정 활동의 참가자들을 조회합니다.")
+    public ResponseEntity<List<ActivityParticipantDTO>> getActivityParticipants(@PathVariable Long activityId) {
+        List<ActivityParticipantDTO> participants = activityService.getParticipants(activityId);
+        return ResponseEntity.ok(participants);
+    }
+
 
 }

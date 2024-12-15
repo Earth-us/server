@@ -1,10 +1,12 @@
 package com.greenity.server.service;
 
 import com.greenity.server.dto.ActivityDTO;
+import com.greenity.server.dto.ActivityParticipantDTO;
 import com.greenity.server.dto.ActivitySearchDTO;
 import com.greenity.server.mapper.ActivityMapper;
 import com.greenity.server.model.Activity;
 import com.greenity.server.repository.ActivityRepository;
+import com.greenity.server.repository.ParticipateRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,10 +17,12 @@ import java.util.List;
 public class ActivityService {
 
     private final ActivityRepository activityRepository;
+    private final ParticipateRepository participateRepository;
 
     @Autowired
-    public ActivityService(ActivityRepository activityRepository) {
+    public ActivityService(ActivityRepository activityRepository, ParticipateRepository participateRepository) {
         this.activityRepository = activityRepository;
+        this.participateRepository = participateRepository;
     }
 
     // 활동 생성
@@ -72,5 +76,11 @@ public class ActivityService {
 
         // 활동 삭제
         activityRepository.delete(activity);
+    }
+
+
+    //활동 참가자 조회
+    public List<ActivityParticipantDTO> getParticipants(Long activityId) {
+        return participateRepository.findParticipantsByActivityId(activityId);
     }
 }

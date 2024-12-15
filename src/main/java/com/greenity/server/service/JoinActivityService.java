@@ -85,7 +85,7 @@ public class JoinActivityService {
             Participate participate = new Participate();
             participate.setUser(user);
             participate.setActivity(activity);
-            participate.setRole(Participate.Role.MEMBER);
+            participate.setRole(Participate.Role.member);
             participateRepository.save(participate);
 
             //해당 활동의 참여자 수 증가
@@ -138,7 +138,7 @@ public class JoinActivityService {
         Participate participate = new Participate();
         participate.setActivity(joinActivity.getActivity());
         participate.setUser(joinActivity.getUser());
-        participate.setRole(Participate.Role.MEMBER);
+        participate.setRole(Participate.Role.member);
         participateRepository.save(participate);
 
 

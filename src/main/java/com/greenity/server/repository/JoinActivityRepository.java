@@ -31,4 +31,7 @@ public interface JoinActivityRepository extends JpaRepository<JoinActivity, Long
     @Query("SELECT j FROM JoinActivity j WHERE j.user.id = :userId")
     List<JoinActivity> findByUserId(@Param("userId") Long userId);
 
+
+
+
 }

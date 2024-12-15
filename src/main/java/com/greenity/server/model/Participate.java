@@ -26,6 +26,6 @@ public class Participate {
     private Role role; // 역할 (리더/회원)
 
     public enum Role {
-        LEADER, MEMBER
+        leader, member
     }
 }

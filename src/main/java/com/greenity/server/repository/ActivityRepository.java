@@ -1,6 +1,7 @@
 package com.greenity.server.repository;
 
 
+
 import com.greenity.server.dto.ActivitySearchDTO;
 import com.greenity.server.model.Activity;
 import io.lettuce.core.dynamic.annotation.Param;
@@ -25,8 +26,6 @@ public interface ActivityRepository extends JpaRepository<Activity, Long> {
             @Param("category") Activity.Category category,
             @Param("activityMethod") Activity.ActivityMethod activityMethod
     );
-
-
 
 
 }
