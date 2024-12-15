@@ -1,5 +1,6 @@
 package com.greenity.server.service;
 
+import com.greenity.server.dto.JoinActivityResponseDTO;
 import com.greenity.server.model.Activity;
 import com.greenity.server.model.JoinActivity;
 import com.greenity.server.model.Participate;
@@ -10,6 +11,8 @@ import com.greenity.server.repository.ParticipateRepository;
 import com.greenity.server.repository.UserRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 public class JoinActivityService {
@@ -95,6 +98,76 @@ public class JoinActivityService {
         }
 
     }
+
+    //리더가 pending list 확인
+    public List<JoinActivityResponseDTO> getPending(Long activityId, Long userId){
+        //리더가 맞는지 확인
+        Long leaderId = participateRepository.isLeader(activityId)
+                .orElseThrow(()-> new IllegalArgumentException("리더 정보가 없거나 잘못된 활동 번호입니다."));
+        if(!leaderId.equals(userId)){
+            throw new IllegalArgumentException("리더가 아닙니다.");
+        }
+
+        return joinActivityRepository.findPendingList(activityId);
+    }
+
+    /*
+    리더가 accept
+     */
+    @Transactional
+    public void acceptJoinRequest(Long activityId, Long userId){
+        //활동과 사용자가 있는지 확인
+        JoinActivity joinActivity = joinActivityRepository.findByActivityIdAndUserId(activityId, userId)
+                .orElseThrow(()->new IllegalArgumentException("잘못된 신청입니다."));
+
+        //사용자의 상태가 pending인지 확인
+        if(!joinActivity.getIsAccepted().equals(JoinActivity.JoinStatus.pending)){
+            throw new IllegalArgumentException("해당 신청은 이미 처리되었습니다.");
+        }
+        //모집 인원 초과 확인
+        Activity activity = joinActivity.getActivity();
+        if(activity.getCurrentParticipants() >= activity.getRecruitNum()){
+            throw  new IllegalArgumentException("모집 인원을 초과하여 신청을 승인할 수 없습니다.");
+        }
+
+        //상태 변경
+        joinActivity.setIsAccepted(JoinActivity.JoinStatus.accepted);
+        joinActivityRepository.save(joinActivity);
+
+        //참여자로 추가
+        Participate participate = new Participate();
+        participate.setActivity(joinActivity.getActivity());
+        participate.setUser(joinActivity.getUser());
+        participate.setRole(Participate.Role.MEMBER);
+        participateRepository.save(participate);
+
+
+        //해당 활동의 참여자 수 증가
+        activity.setCurrentParticipants(activity.getCurrentParticipants() + 1);
+        activityRepository.save(activity);
+
+    }
+
+    /*
+    리더가 거절
+     */
+    @Transactional
+    public void rejectJoinRequest(Long activityId, Long userId){
+        //활동과 사용자가 존재하는지 확인
+        JoinActivity joinActivity = joinActivityRepository.findByActivityIdAndUserId(activityId,userId)
+                .orElseThrow(()-> new IllegalArgumentException("잘못된 신청입니다."));
+
+        //상태 확인
+        if(!joinActivity.getIsAccepted().equals(JoinActivity.JoinStatus.pending)){
+            throw new IllegalArgumentException("해당 신청은 이미 처리되었습니다.");
+
+        }
+
+        //상태 변경
+        joinActivity.setIsAccepted(JoinActivity.JoinStatus.rejected);
+        joinActivityRepository.save(joinActivity);
+    }
+
 
 
 }

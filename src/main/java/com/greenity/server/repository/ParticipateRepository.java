@@ -1,7 +1,9 @@
 package com.greenity.server.repository;
 
 import com.greenity.server.model.Participate;
+import io.lettuce.core.dynamic.annotation.Param;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -19,4 +21,10 @@ public interface ParticipateRepository extends JpaRepository<Participate, Long> 
 
     //특정 사용자와 활동의  참여 정보 조회
     //Optional<Participate> findByActivityIdAndUserId(Long activityId, Long userId);
+
+    //특정 활동의 리더 user id 가져오기
+    @Query("SELECT p.user.id FROM Participate p WHERE p.activity.id = :activityId and p.role = 'leader'")
+    Optional<Long> isLeader(@Param("activityId")Long activityId);
+
+
 }
