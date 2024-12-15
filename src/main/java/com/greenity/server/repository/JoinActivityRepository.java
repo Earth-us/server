@@ -27,5 +27,8 @@ public interface JoinActivityRepository extends JpaRepository<JoinActivity, Long
             "WHERE j.activity.id = :activityId AND j.isAccepted = 'PENDING'")
     List<JoinActivityResponseDTO> findPendingList(@Param("activityId") Long activityId);
 
+    //특정 사용자의 신청 목록 조회
+    @Query("SELECT j FROM JoinActivity j WHERE j.user.id = :userId")
+    List<JoinActivity> findByUserId(@Param("userId") Long userId);
 
 }

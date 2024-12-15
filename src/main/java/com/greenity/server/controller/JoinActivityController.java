@@ -64,6 +64,8 @@ public class JoinActivityController {
         return ResponseEntity.ok("사용자의 신청이 거절되었습니다.");
     }
 
+
+
 /*
     // 2. 특정 상태의 신청 목록 조회
     @GetMapping
