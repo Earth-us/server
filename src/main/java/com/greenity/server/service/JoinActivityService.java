@@ -168,6 +168,22 @@ public class JoinActivityService {
         joinActivityRepository.save(joinActivity);
     }
 
+    /*
+    \ 활동 탈퇴
+     */
+    @Transactional
+    public void leaveActivity(Long activityId, Long userId){
+        //활동이 존재하는지, 사용자가 존재하는지
+         joinActivityRepository.findByActivityIdAndUserId(activityId,userId)
+                .orElseThrow(() -> new IllegalArgumentException("삭제할 수 없습니다."));
+
+        //활동 탈퇴
+        participateRepository.deleteByActivityIdAndUserId(activityId, userId);
+
+
+
+    }
+
 
 
 }

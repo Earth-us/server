@@ -2,7 +2,6 @@ package com.greenity.server.controller;
 
 
 import com.greenity.server.dto.JoinActivityResponseDTO;
-import com.greenity.server.model.JoinActivity;
 import com.greenity.server.service.JoinActivityService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -22,7 +21,7 @@ public class JoinActivityController {
         this.joinActivityService = joinActivityService;
     }
 
-    // 1. 활동 신청 생성
+    // 활동 신청 생성
     @PostMapping
     @Operation(summary ="활동 신청", description = "특정 활동을 신청합니다.")
     public ResponseEntity<String> joinActivity(
@@ -33,7 +32,7 @@ public class JoinActivityController {
     }
 
 
-    //2. 리더가 신청 리스트 확인
+    //리더가 신청 리스트 확인
     @GetMapping("/pending")
     @Operation(summary ="활동 신청 리스트 확인 (리더)", description = "특정 활동을 신청 리스트를 확인합니다.")
     public ResponseEntity<List<JoinActivityResponseDTO>> getPendingList(
@@ -44,7 +43,7 @@ public class JoinActivityController {
         return ResponseEntity.ok(result);
     }
 
-    //3.리더가 수락 또는 거절
+    //리더가 수락 또는 거절
 
     @PutMapping("/{userId}/accept")
     @Operation(summary =" 활동 승인 (리더)", description = "특정 활동의 신청을 승인합니다.")
@@ -65,34 +64,14 @@ public class JoinActivityController {
     }
 
 
-
-/*
-    // 2. 특정 상태의 신청 목록 조회
-    @GetMapping
-    public ResponseEntity<List<JoinActivity>> getJoinActivitiesByStatus(
+    @DeleteMapping
+    @Operation(summary = "활동 탈퇴", description = "특정 활동을 탈퇴합니다.")
+    public ResponseEntity<Void> deleteActivity(
             @PathVariable Long activityId,
-            @RequestParam JoinActivity.JoinStatus status) {
-        List<JoinActivity> joinActivities = joinActivityService.getJoinActivitiesByStatus(activityId, status);
-        return ResponseEntity.ok(joinActivities);
+            @RequestParam Long userId){
+        joinActivityService.leaveActivity(activityId, userId);
+        return ResponseEntity.noContent().build();
     }
 
-    // 3. 신청 승인
-    @PutMapping("/accept")
-    public ResponseEntity<String> acceptJoinActivity(
-            @PathVariable Long activityId,
-            @RequestParam Long userId) {
-        joinActivityService.acceptJoinActivity(activityId, userId);
-        return ResponseEntity.ok("신청이 승인되었습니다.");
-    }
 
-    // 4. 신청 거절
-    @PutMapping("/reject")
-    public ResponseEntity<String> rejectJoinActivity(
-            @PathVariable Long activityId,
-            @RequestParam Long userId) {
-        joinActivityService.rejectJoinActivity(activityId, userId);
-        return ResponseEntity.ok("신청이 거절되었습니다.");
-    }
-
- */
 }

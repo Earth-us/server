@@ -33,4 +33,7 @@ public interface ParticipateRepository extends JpaRepository<Participate, Long> 
     List<ActivityParticipantDTO> findParticipantsByActivityId(@Param("activityId") Long activityId);
 
 
+    //특정 활동의 특정 참가자 탈퇴
+    int deleteByActivityIdAndUserId(Long activityId,Long userId);
+
 }
