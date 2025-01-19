@@ -2,16 +2,37 @@ spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/greenitydb
-    username: root     # ????? ?? ??
+    username: root
     password: 1234
 
-  jpa:
+
     hibernate:
       ddl-auto: create   # update or create or none
     show-sql: true
     properties:
       hibernate:
-        format_sql: true
+        format_sql:
+
+  #Redis
+  data:
+    redis:
+      host: localhost
+      port: 6379
+
+  #Mail
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: rose149344@gmail.com
+    password: twzibyhmzebjcoug
+    protocol: smtp
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+    auth-code-expiration-millis: 300000
 
 springdoc:
   api-docs:
@@ -22,3 +43,19 @@ springdoc:
 
 server:
   port: 8080
+
+#kakao
+kakao:
+  api-key: 8d1e1f84f8faf3d462fee06e9c0fa4cd
+  redirect-uri: http://localhost:8080/api/auth/login/kakao/callback
+  token-uri: https://kauth.kakao.com/oauth/token
+  user-info-uri: https://kapi.kakao.com/v2/user/me
+
+#jwt
+jwt:
+  secret: VlwEyVBsYt9V7zq57TejMnVUyzblYcfPQye08f7MGVA9XkHa
+  token:
+    access-expiration-time: 43200000
+    refresh-expiration-time: 604800000
+
+
