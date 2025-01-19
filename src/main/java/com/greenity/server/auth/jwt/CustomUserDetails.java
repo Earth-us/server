@@ -1,6 +1,6 @@
 package com.greenity.server.auth.jwt;
 
-import com.greenity.server.user.model.User;
+import com.greenity.server.user.entity.User;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

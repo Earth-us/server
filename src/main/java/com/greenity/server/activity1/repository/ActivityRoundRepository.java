@@ -1,6 +1,6 @@
-package com.greenity.server.activity.repository;
+package com.greenity.server.activity1.repository;
 
-import com.greenity.server.activity.model.ActivityRound;
+import com.greenity.server.activity1.model.ActivityRound;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;

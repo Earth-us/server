@@ -1,6 +1,6 @@
 package com.greenity.server.user.repository;
 
-import com.greenity.server.user.model.User;
+import com.greenity.server.user.entity.User;
 import lombok.NonNull;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

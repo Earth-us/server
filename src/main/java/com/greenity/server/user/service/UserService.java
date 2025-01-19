@@ -1,7 +1,7 @@
 package com.greenity.server.user.service;
 
 import com.greenity.server.user.dto.request.SignUpRequest;
-import com.greenity.server.user.model.User;
+import com.greenity.server.user.entity.User;
 import com.greenity.server.user.dto.request.UpdateUserRequest;
 import com.greenity.server.user.dto.response.UserResponse;
 import com.greenity.server.user.repository.UserRepository;

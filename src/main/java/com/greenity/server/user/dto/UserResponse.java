@@ -1,7 +1,7 @@
 package com.greenity.server.user.dto.response;
 
 import com.greenity.server.badge.model.Badge;
-import com.greenity.server.user.model.User;
+import com.greenity.server.user.entity.User;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;

@@ -1,6 +1,6 @@
 package com.greenity.server.auth.jwt;
 
-import com.greenity.server.user.model.User;
+import com.greenity.server.user.entity.User;
 import com.greenity.server.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;

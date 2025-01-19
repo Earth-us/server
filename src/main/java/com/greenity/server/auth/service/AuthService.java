@@ -3,7 +3,7 @@ package com.greenity.server.auth.service;
 import com.greenity.server.global.util.email.EmailService;
 import com.greenity.server.global.util.redis.RedisService;
 import com.greenity.server.user.dto.response.KakaoUserResponse;
-import com.greenity.server.user.model.User;
+import com.greenity.server.user.entity.User;
 import com.greenity.server.auth.dto.LoginRequest;
 import com.greenity.server.auth.jwt.JwtProvider;
 import com.greenity.server.user.repository.UserRepository;

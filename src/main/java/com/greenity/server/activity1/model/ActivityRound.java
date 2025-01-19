@@ -1,4 +1,4 @@
-package com.greenity.server.activity.model;
+package com.greenity.server.activity1.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;

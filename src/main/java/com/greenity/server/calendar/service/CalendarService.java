@@ -1,11 +1,10 @@
 package com.greenity.server.calendar.service;
 
-import com.greenity.server.activity.model.ActivityRound;
-import com.greenity.server.activity.repository.ActivityRoundRepository;
+import com.greenity.server.activity1.model.ActivityRound;
+import com.greenity.server.activity1.repository.ActivityRoundRepository;
 import com.greenity.server.calendar.dto.CalendarActivityResponse;
-import com.greenity.server.user.model.User;
+import com.greenity.server.user.entity.User;
 import com.greenity.server.user.repository.UserRepository;
-import com.greenity.server.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;

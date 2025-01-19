@@ -1,7 +1,7 @@
 package com.greenity.server.badge.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.greenity.server.user.model.User;
+import com.greenity.server.user.entity.User;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

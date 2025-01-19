@@ -1,4 +1,4 @@
-package com.greenity.server.user.model;
+package com.greenity.server.user.entity;
 
 import com.greenity.server.badge.model.Badge;
 import jakarta.persistence.*;

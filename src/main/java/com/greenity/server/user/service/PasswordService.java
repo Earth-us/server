@@ -4,7 +4,7 @@ import com.greenity.server.user.dto.request.ResetPasswordRequest;
 import com.greenity.server.user.dto.request.VerifyCodeRequest;
 import com.greenity.server.global.util.email.EmailService;
 import com.greenity.server.global.util.redis.RedisService;
-import com.greenity.server.user.model.User;
+import com.greenity.server.user.entity.User;
 import com.greenity.server.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;

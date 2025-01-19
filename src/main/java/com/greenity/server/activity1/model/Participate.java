@@ -1,6 +1,6 @@
-package com.greenity.server.activity.model;
+package com.greenity.server.activity1.model;
 
-import com.greenity.server.user.model.User;
+import com.greenity.server.user.entity.User;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
