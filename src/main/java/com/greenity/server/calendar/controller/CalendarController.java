@@ -1,3 +1,4 @@
+/*
 package com.greenity.server.calendar.controller;
 
 import com.greenity.server.calendar.dto.CalendarActivityResponse;
@@ -25,3 +26,5 @@ public class CalendarController {
         return ResponseEntity.ok(activities);
     }
 }
+
+ */
